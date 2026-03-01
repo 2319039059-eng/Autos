@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- 
+    - etiquetas principales
+  -->
+  <title>AutoSelect - Consesionaria de automovil</title>
+  <meta name="title" content="AutoSelect - Venta de Autos">
+  <meta name="description" content="La mejor Consesionaria de Autos">
+
+  <!-- 
+    - ícono del sitio
+  -->
+  <link rel="shortcut icon" href="img/Favicon.jpg" type="image/svg+xml">
+
+
+
+  <!-- 
+    - iconos oficiales
+  -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@40,600,0,0" />
+
+  <!-- 
+    - estilos
+  -->
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/Carrusel.css">
+
+  <!-- 
+    - imagenes
+  -->
+  <link rel="preload" as="image" href="./img/herobanner.png">
+  <link rel="preload" as="image" href="./img/herobg.png">
+
+</head>
+
+<body>
+
+  <!-- 
+    - #HEADER
+  -->
+
+  <header class="header">
+    <div class="container">
+
+      <a href="#" class="logo">
+        <img src="./img/logo1.png" width="128" height="63" alt="autoSelect home">
+      </a>
+
+      <nav class="navbar" data-navbar>
+        <ul class="navbar-list">
+
+          <li>
+            <a href="index.html" class="navbar-link">Inicio</a>
+          </li>
+
+          <li>
+            <a href="./Interfaces/Catalogo.html" class="navbar-link">Catalogo</a>
+          </li>
+
+          <li>
+            <a href="footer" class="navbar-link">Contactos</a>
+          </li>
+
+
+        </ul>
+      </nav>
+
+      <a href="Interfaces/Login.html" class="btn btn-primary">
+        <span class="span">Iniciar Sesión</span>
+
+        <span class="material-symbols-rounded">arrow_forward</span>
+      </a>
+
+      <button class="nav-toggle-btn" aria-label="toggle menu" data-nav-toggler>
+  <span class="nav-toggle-icon icon-1"></span>
+  <span class="nav-toggle-icon icon-2"></span>
+  <span class="nav-toggle-icon icon-3"></span>
+</button>
+    </div>
+  </header>
+
+
+
+
+
+  <main>
+    <article>
+      <!-- 
+    - Primera seccion
+  -->
+      <section class="hero has-bg-image" aria-label="home" style="background-image: url('./IMG/herobg.jpg')">
+        <div class="container">
+
+          <div class="hero-content">
+
+            <h1 class="section-text"> LA MEJOR OPCIÓN PARA TU PROXIMO VIAJE
+
+            </h1>
+
+            <a href="./Interfaces/Catalogo.html" class="btn">
+              <span class="span"> La casa de la innovación</span>
+
+              <span class="material-symbols-rounded">arrow_forward</span>
+            </a>
+
+          </div>
+
+          <figure class="hero-banner" style="--width: 1228; --height: 789;">
+            <img src="./img/herobanner.png" width="1228" height="789" alt="red motor vehicle" class="move-anim">
+          </figure>
+
+        </div>
+      </section>
+
+
+      <!-- 
+    - #Carrusel
+  -->
+<section class="sss">
+<div class="swiper">
+    <div class="swiper-wrapper">
+
+      <!-- Tarjeta 1 -->
+      <div class="swiper-slide">
+        <div class="card-image">
+          <img src="./img/toyota.jpg" alt="Designer">
+        </div>
+        <div class="card-content">
+          <span class="tag designer">TRD</span>
+          <h5>Lo mejor para una buena experiencia</h5>
+          <p>Cuando de herencia del off-road se trata, solo hay un nombre que necesitas conocer: Toyota Racing Development (TRD).</p>
+        </div>
+        <div class="arrow">
+          <a href="#">↗</a>
+        </div>
+      </div>
+
+      <!-- Tarjeta 2 -->
+      <div class="swiper-slide">
+        <div class="card-image">
+           <img src="./img/t2.jpg">
+        </div>
+        <div class="card-content">
+          <span class="tag developer">TRD pro</span>
+          <h5>Suspensión estandar</h5>
+          <p>OCuando de herencia del off-road se trata, solo hay un nombre que necesitas conocer: Toyota Racing Development (TRD).</p>
+        </div>
+        <div class="arrow">
+          <a href="#">↗</a>
+        </div>
+      </div>
+
+      <!-- Tarjeta 3 -->
+      <div class="swiper-slide">
+        <div class="card-image">
+          <img src="./img/toyota2.png" alt="Marketer">
+        </div>
+        <div class="card-content">
+          <span class="tag marketer">Tacoma TRD pro</span>
+          <h5>4x4</h5>
+          <p>Cuando de herencia del off-road se trata, solo hay un nombre que necesitas conocer: Toyota Racing Development (TRD).</p>
+        </div>
+        <div class="arrow">
+          <a href="#">↗</a>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="card-image">
+          <img src="./img/t4.jpg" alt="Marketer">
+       </div>
+        <div class="card-content">
+          <span class="tag marketer">Tacoma TRD pro</span>
+          <h5>4x4</h5>
+          <p>Cuando de herencia del off-road se trata, solo hay un nombre que necesitas conocer: Toyota Racing Development (TRD).</p>
+        </div>
+        <div class="arrow">
+          <a href="#">↗</a>
+        </div>
+        
+
+    </div>
+
+
+  <!--movimiento dl carrusel -->
+ 
+  <script>
+    const swiper = new Swiper('.swiper', {
+      direction: 'horizontal', // 🔹 Asegura que sea horizontal
+      slidesPerView: 3,
+      spaceBetween: 30,
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        0: { slidesPerView: 1 },
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 }
+      }
+    });
+  </script>
+</section>
+     
+
+      <!-- 
+        - #tercera seccion
+      -->
+
+      <section class="section about has-before" aria-labelledby="about-label">
+        <div class="container">
+
+          <figure class="about-banner">
+             <video class="video" src="./video/video1.mp4" width=""  autoplay muted loop controls></video>
+          </figure>
+
+          <div class="about-content">
+
+            <p class="section-subtitle :dark">La historia detrás del WRC</p>
+
+            <h2 class="h2 section-title">¿Qué es el WEC?</h2>
+            <p class="section-text">
+              El FIA World Endurance Championship sigue teniendo como piedra angular uno de los mayores acontecimientos deportivos del mundo: las 24 Horas de Le Mans.
+El WEC ofrece a los fabricantes una prueba real de sus avances en el diseño de los coches de carretera. También pone a prueba la tecnología, el rendimiento y la seguridad de los crossovers.
+Se disputa a lo largo de siete rondas en Norteamérica, Europa, Asia y Medio Oriente, con carreras de distintas distancias entre 6 y 24 horas.
+            </p>
+
+            <p class="section-text">
+              Encontrará que está en él, el volumen de deseo de ser más que nada para los estilos de las consecuencias o
+              para él.
+            </p>
+
+            <ul class="about-list">
+
+              <li class="about-item">
+                <p>
+                  <strong class="display-1 strong">8K+</strong> Clientes Felices
+                </p>
+              </li>
+
+              <li class="about-item">
+                <p>
+                  <strong class="display-1 strong">22+</strong> Instrumentos
+                </p>
+              </li>
+
+              <li class="about-item">
+                <p>
+                  <strong class="display-1 strong">50+</strong> Años en el mercado
+                </p>
+              </li>
+
+              <li class="about-item">
+                <p>
+                  <strong class="display-1 strong">99%</strong> Proyectos completados
+                </p>
+              </li>
+
+            </ul>
+
+          </div>
+
+        </div>
+      </section>
+
+
+
+
+
+      <!-- 
+        - #cuarta seccion
+      -->
+
+      <section class="section work" aria-labelledby="work-label">
+        <div class="container">
+
+          <p class="section-subtitle :light" id="work-label">Nuestras camionetas</p>
+
+          <h2 class="h2 section-title">AUTOS PREMIUM</h2>
+
+          <ul class="has-scrollbar">
+
+            <li class="scrollbar-item">
+              <div class="work-card">
+
+                <figure class="card-banner img-holder" style="--width: 350; --height: 406;">
+                  <img src="./img/pr.jpeg" width="350" height="406" loading="lazy" alt="Engine Repair"
+                    class="img-cover">
+                </figure>
+
+                <div class="card-content">
+                  <p class="card-subtitle">Toyota Gazoo Racing</p>
+
+                  <h3 class="h3 card-title">Esta unidad, basándose en la tecnología de Prius, decide si usa la energía almacenada en la batería o si extrae energía de la pila del combustible.</h3>
+
+                  <a href="#" class="card-btn">
+                    <span class="material-symbols-rounded">arrow_forward</span>
+                  </a>
+                </div>
+
+              </div>
+            </li>
+
+            <li class="scrollbar-item">
+              <div class="work-card">
+
+                <figure class="card-banner img-holder" style="--width: 350; --height: 406;">
+                  <img src="./img/img3.jpg" width="350" height="406" loading="lazy" alt="Car Tyre change"
+                    class="img-cover">
+                </figure>
+
+                <div class="card-content">
+                  <p class="card-subtitle">Toyota GR YARIS</p>
+
+                  <h3 class="h3 card-title"> Toyota GR Yaris RZ de la Toyota Gazoo Racing Iberian Cup</h3>
+
+                  <a href="#" class="card-btn">
+                    <span class="material-symbols-rounded">arrow_forward</span>
+                  </a>
+                </div>
+
+              </div>
+            </li>
+
+            <li class="scrollbar-item">
+              <div class="work-card">
+
+                <figure class="card-banner img-holder" style="--width: 350; --height: 406;">
+                  <img src="./img/troca.jpg" width="350" height="406" loading="lazy" alt="Battery Adjust"
+                    class="img-cover">
+                </figure>
+
+                <div class="card-content">
+                  <p class="card-subtitle">Toyota Gazoo Racing</p>
+
+                  <h3 class="h3 card-title">Toyota Gazoo Racing, la fórmula de Toyota para fabricar mejores vehículos</h3>
+
+                  <a href="#" class="card-btn">
+                    <span class="material-symbols-rounded">arrow_forward</span>
+                  </a>
+                </div>
+
+              </div>
+            </li>
+
+          </ul>
+
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+
+
+
+
+  <!-- 
+    - #FOOTER
+  -->
+
+  <footer class="footer">
+
+    <div class="footer-top section">
+      <div class="container">
+
+        <div class="footer-brand">
+
+          <a href="#" class="logo">
+            <img src="./img/logo1.png" width="128" height="63" alt="autoselect">
+          </a>
+
+          <p class="footer-text">
+            A menudo, las necesidades de la voluntad serán rechazadas y los problemas no son aceptados.
+          </p>
+
+          <ul class="social-list">
+
+            <li>
+              <a href="https://www.facebook.com/share/17RM3TEMES/" class="social-link">
+                <img src="./img/facebook.svg" alt="facebook">
+              </a>
+            </li>
+
+            <li>
+              <a href="https://www.instagram.com/auto_select.premium?igsh=YXRncWtoc3ZuajVx" class="social-link">
+                <img src="./img/instagram.svg" alt="instagram">
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <img src="./img/twitter.svg" alt="twitter">
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="h3">Horario de apertura</p>
+          </li>
+
+          <li>
+            <p class="p">Lunes – Viernes</p>
+
+            <span class="span">12:00 pm – 14:45 pm</span>
+          </li>
+
+        </ul>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="h3">Información de contacto</p>
+          </li>
+
+          <li>
+            <a href="tel:+527721623381" class="footer-link">
+              <span class="material-symbols-rounded">telefono</span>
+
+              <span class="span">+52 772-162-3381</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="mailto:info@autoselect.com" class="footer-link">
+              <span class="material-symbols-rounded">email</span>
+
+              <span class="span">auto_select@gmail.com</span>
+            </a>
+          </li>
+
+          <li>
+            <address  class="footer-link address">
+              <span class="span"><a href="https://maps.app.goo.gl/xG3J97jEHS8kugzh9">Ubicación</a></span>
+              <iframe src="../AutoSelect/img/mapss.png" width="" height="" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </address>
+          </li>
+
+        </ul>
+
+      </div>
+
+      <img src="./img/footer-shape-3.png" width="637" height="173" loading="lazy" alt="Shape"
+        class="shape shape-3 move-anim">
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+
+        <p class="copyright">Auto-Select @copyright</p>
+
+        <img src="./img/footer-shape-2.png" width="778" height="335" loading="lazy" alt="Shape" class="shape shape-2">
+
+        <img src="./img/footer-shape-1.png" width="805" height="652" loading="lazy" alt="Red Car"
+          class="shape shape-1 move-anim">
+
+      </div>
+    </div>
+
+  </footer>
+
+
+
+
+
+  <!-- 
+    - custom js link
+  -->
+  <script src="./assets/js/script.js"></script>
+
+</body>
+
+</html>

@@ -346,7 +346,7 @@ body {
 }
 
 .navbar-link {
-  font-family: var(--ff-chakra-petch);
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-size: var(--fs-5);
   text-transform: uppercase;
   color: var(--white);

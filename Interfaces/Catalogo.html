@@ -3,162 +3,134 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Vehículos Premium</title>
 
-  <title>AutoSelect - Concesionaria de Automóviles</title>
-  <link rel="shortcut icon" href="../IMG/Favicon.jpg" type="image/svg+xml">
+  <!-- CSS propio -->
+  <link rel="stylesheet" href="../css/catalogo.css">
 
+ <link rel="stylesheet" href="../css">
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Mulish&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="../img/herobanner.png">
+  <link rel="preload" as="image" href="../img/herobg.jpg">
 
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@40,600,0,0" />
-
-  <link rel="stylesheet" href="../CSS/catalogo.css">
-  <link rel="stylesheet" href="../CSS/Login.css">
 </head>
 
-<body class="ss">
+<body>
 
-  <header class="header">
+  <!-- ================= HEADER ================= -->
+  <header>
     <div class="container">
-      <a href="../index.html" class="logo">
-        <img src="../IMG/logo (1).png" width="80" height="124" alt="AutoSelect">
-      </a>
+      <nav>
+        <div class="logo">
+          <img class="logo"src="../img/logo1.png"/>
 
-      <nav class="navbar" data-navbar>
-        <ul class="navbar-list">
-          <li><a href="../index.html" class="navbar-link">Inicio</a></li>
-          <li><a href="../index.html" class="navbar-link">Salir</a></li>
-          <li><a href="./Catalogo.html" class="navbar-link">Catálogo</a></li>
-          <li><a href="../index.html#section work" class="navbar-link">Proyectos</a></li>
-          <li><a href="#" class="navbar-link">Contacto</a></li>
-        </ul>
+        </div>
+
+        <div>
+          <a href="../principal.html" class="nav-link">INICIO</a>
+          <a href="./Catalogo.html" class="nav-link">CATÁLOGO</a>
+          <a href="../index/footer.html" class="nav-link">CONTACTO</a>
+        </div>
       </nav>
-
-      <button class="nav-toggle-btn" aria-label="toggle menu" data-nav-toggler>
-        <span class="nav-toggle-icon icon-1"></span>
-        <span class="nav-toggle-icon icon-2"></span>
-        <span class="nav-toggle-icon icon-3"></span>
-      </button>
     </div>
   </header>
 
-  <section class="catalog" id="catalog">
-    <div class="content">
-      <div class="title-wrapper-catalog">
-        <p>ENCUENTRA LO QUE BUSQUES</p>
-        <h3>Catálogo de Vehículos</h3>
-      </div>
+  <!-- ================= HERO ================= -->
+  <section class="hero-bg">
+    <div class="container hero-content">
 
-      <div class="filter-card">
-        <input type="text" class="search-input" placeholder="Busca tu modelo favorito" />
-        <button class="search-button">Buscar</button>
-      </div>
+     <div class="container hero-content">
 
-      <h3 class="category-title">Camionetas Pickup</h3>
-      <div class="card-wrapper">
+  <div class="hero-text">
+    <h1>
+      ENCUENTRA TU <br>
+      <span class="accent">VEHÍCULO IDEAL</span>
+    </h1>
 
-        <div class="card-item">
-          <img src="../IMG/toyota-hilux-sr.png" alt="Hilux" />
-          <div class="card-content">
-            <h3>Toyota Hilux</h3>
-            <p>Color: Blanco</p>
-            <p>Marca: Toyota</p>
-            <p>Modelo: Hilux</p>
-            <button type="button">
-              <a href="cotizacion.html?modelo=Hilux&color=Blanco&precio=495400&imagen=../IMG/toyota-hilux-sr.png">COTÍZALO AHORA!</a>
-            </button>
-          </div>
-        </div>
+    <p style="margin-bottom:20px; font-size:20px;">
+      Catálogo de Vehículos Premium
+    </p>
 
-        <div class="card-item">
-          <img src="../IMG/toyota-tacoma.png" alt="Tacoma" />
-          <div class="card-content">
-            <h3>Toyota Tacoma</h3>
-            <p>Color: Roja</p>
-            <p>Marca: Toyota</p>
-            <p>Modelo: Tacoma</p>
-            <button type="button">
-              <a href="cotizacion.html?modelo=Tacoma&color=Roja&precio=777900&imagen=../IMG/toyota-tacoma.png">COTÍZALO AHORA!</a>
-            </button>
-          </div>
-        </div>
+    <div class="search-box">
+      <input type="text" id="search-input" placeholder="Busca tu modelo favorito">
+      <button>Buscar</button>
+    </div>
+  </div>
 
-        <div class="card-item">
-          <img src="../IMG/toyota-tundra.png" alt="Tundra" />
-          <div class="card-content">
-            <h3>Toyota Tundra</h3>
-            <p>Color: Blanco</p>
-            <p>Marca: Toyota</p>
-            <p>Modelo: Tundra</p>
-            <button type="button">
-              <a href="cotizacion.html?modelo=Tundra&color=Blanco&precio=1486000&imagen=../IMG/toyota-tundra.png">COTÍZALO AHORA!</a>
-            </button>
-          </div>
-        </div>
-      </div>
+  <div class="hero-image">
+    <img src="../img/herobanner.png" alt="Auto Premium">
+  </div>
 
-      <h3 class="category-title">Camionetas SUV / Crossover</h3>
-      <div class="card-wrapper">
+</div>
+  </section>
 
-        <div class="card-item">
-          <img src="../IMG/Toyota Sequoia.jpeg" alt="Sequoia" />
-          <div class="card-content">
-            <h3>Toyota Sequoia</h3>
-            <p>Color: Negro</p>
-            <p>Marca: Toyota</p>
-            <p>Modelo: Sequoia</p>
-            <button type="button">
-              <a href="cotizacion.html?modelo=Sequoia&color=Negro&precio=1486000&imagen=../IMG/Toyota Sequoia.jpeg">COTÍZALO AHORA!</a>
-            </button>
-          </div>
-        </div>
+  <!-- ================= CATALOGO ================= -->
+  <section id="catalogo" class="catalogo">
+    <div class="container">
 
-        <div class="card-item">
-          <img src="../IMG/Toyota 4Runner.png" alt="4Runner" />
-          <div class="card-content">
-            <h3>Toyota 4Runner</h3>
-            <p>Color: Plata</p>
-            <p>Marca: Toyota</p>
-            <p>Modelo: 4Runner</p>
-            <button type="button">
-              <a href="cotizacion.html?modelo=4Runner&color=Plata&precio=870000&imagen=../IMG/Toyota 4Runner.png">COTÍZALO AHORA!</a>
-            </button>
-          </div>
-        </div>
+      <h2 style="text-align:center; margin-bottom:50px;">
+        Camionetas <span class="accent">Pickup</span>
+      </h2>
 
-        <div class="card-item">
-          <img src="../IMG/Toyota RAV4.png" alt="RAV4" />
-          <div class="card-content">
-            <h3>Toyota RAV4</h3>
-            <p>Color: Blanca</p>
-            <p>Marca: Toyota</p>
-            <p>Modelo: RAV4</p>
-            <button type="button">
-              <a href="cotizacion.html?modelo=RAV4&color=Blanca&precio=615000&imagen=../IMG/Toyota RAV4.png">COTÍZALO AHORA!</a>
-            </button>
-          </div>
-        </div>
+     <div class="grid">
 
-        <div class="card-item">
-          <img src="../IMG/Toyota Land Cruiser Prado.webp" alt="Land Cruiser Prado" />
-          <div class="card-content">
-            <h3>Toyota Land Cruiser Prado</h3>
-            <p>Color: Blanco</p>
-            <p>Marca: Toyota</p>
-            <p>Modelo: Land Cruiser Prado </p>
-            <button type="button">
-              <a href="cotizacion.html?modelo=Land Cruiser Prado&color=Blanco&precio=1500000&imagen=../IMG/Toyota Land Cruiser Prado.webp">COTÍZALO AHORA!</a>
-            </button>
-          </div>
-        </div>
+  <!-- Toyota Hilux -->
+  <div class="card">
+    <img src="../img/hilux.jpg" alt="Toyota Hilux">
+    <div class="card-content">
+      <div class="tag">Pickup</div>
+      <h1>Tacoma</h1>
+      <div class="price">Desde $850,000 M.N.</div>
+      <div class="buttons">
+        <button>Cotiza Ahora</button>
+        <button>Explorar</button>
       </div>
     </div>
+  </div>
+
+  <!-- Ford Ranger -->
+  <div class="card">
+    <img src="../img/ranger.jpg" alt="Ford Ranger">
+    <div class="card-content">
+      <div class="tag">Pickup</div>
+      <h1>Ford Ranger</h1>
+      <div class="price">Desde $790,000 M.N.</div>
+      <div class="buttons">
+        <button>COTIZA AHORA</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chevrolet Colorado -->
+  <div class="card">
+    <img src="../img/colorado.jpg" alt="Chevrolet Colorado">
+    <div class="card-content">
+      <div class="tag">Pickup</div>
+      <h1>Chevrolet Colorado</h1>
+      <div class="price">Desde $810,000 M.N.</div>
+      <div class="buttons">
+        <button>COTIZA AHORA</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+    </div>
   </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer id="contacto">
+    <div class="container">
+      <p>© 2024 AutoSelect. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- JS propio -->
+  <script src="../JS/scriptCata.js"></script>
 
 </body>
 </html>

@@ -1,184 +1,288 @@
-/* ================================
-   Sección Catalogo
-  ================================ */
-section.catalog {
- width: 100%; 
- min-height: 100vh; 
- padding: 100px 20px 50px; 
- display: flex; 
- flex-direction: column; 
- align-items: center; 
- justify-content: flex-start; 
- box-sizing: border-box; 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* ================================
-   Título del Catalogo
-   ================================ */
-.title-wrapper-catalog {
- text-align: center; 
- margin-bottom: 50px; 
+body {
+  background: #0a1628;
+  font-family: 'Rajdhani', sans-serif;
+  color: white;
 }
 
-.title-wrapper-catalog p {
- font-size: 1.2rem; 
- font-weight: 600; 
- margin-bottom: 10px; 
+/* Layout */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
 }
 
-.title-wrapper-catalog h3 {
- font-size: 2.5rem; 
- font-weight: 700; 
+header {
+  position: absolute;
+  width: 100%;
+  padding: 20px 0;
 }
 
-/* ================================
-    Títulos de Categoría (Camionetas Abiertas/Cerradas)
-    ================================ */
-.category-title {
-    text-align: center; 
-    margin-top: 50px; /* Espacio superior para separarlo */
-    margin-bottom: 25px; /* Espacio inferior */
-    font-size: 2rem; /* Para que destaquen */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* ================================
-   Filtro de búsqueda
-   ================================ */
-.filter-card {
- width: 100%; 
- max-width: 980px; 
- background: #f0f0f0; 
- border-radius: 8px; 
- display: flex; 
- gap: 0; 
- overflow: hidden; 
- margin-bottom: 50px; 
+.nav-link {
+  color: white;
+  text-decoration: none;
+  margin-left: 30px;
+  font-weight: 600;
+  transition: 0.3s;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-.search-input {
- flex: 1; 
- padding: 0 10px; 
- height: 50px; 
- border: none; 
- font-size: 1.1rem; 
+.nav-link:hover {
+  color: #e31837;
 }
 
-.search-button {
- width: 150px; 
- border: none; 
- background: #0077b6; 
- color: #fff; 
- cursor: pointer; 
- font-size: 1.1rem; 
- transition: 0.2s ease; 
+/* Hero */
+.hero-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a1628, #132238);
+  display: flex;
+  align-items: center;
+  padding-top: 100px;
 }
 
-.search-button:hover {
- background: #dedede; 
- color: #0077b6; 
+.hero-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-/* ================================
-   Contenedor de las tarjetas
-   ================================ */
-.card-wrapper {
- width: 100%; 
- max-width: 1000px; 
- display: grid; 
- grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); 
- gap: 30px; 
+h1 {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 48px;
+  margin-bottom: 20px;
 }
 
-/* ================================
-   Tarjetas individuales
-   ================================ */
-/* ================================
-   Imagen dentro de la tarjeta con efecto 3D esférico
-   ================================ */
-.card-item img {
- width: 80%; 
- height: auto; 
- border-radius: 8px; 
- cursor: pointer; 
- transition: transform 1s; 
- transform-style: preserve-3d; /* Mantiene la perspectiva 3D */
- backface-visibility: hidden; /* Evita que se vea el reverso de la imagen */
+h2 {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 36px;
+  margin-bottom: 20px;
 }
 
-/* Contenedor necesario para perspectiva */
-.card-item {
- perspective: 1000px; /* Profundidad de la perspectiva */
+h3 {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 22px;
+  margin-bottom: 15px;
 }
 
-/* Rotación tipo esfera al pasar el cursor o tocar */
-.card-item img:hover, 
-.card-item img:active {
- transform: rotateY(360deg) rotateX(360deg); /* Giro en ambos ejes */
+.accent {
+  color: #e31837;
+}
+
+.search-box {
+  display: flex;
+  margin-top: 80px;
+}
+
+.search-box input {
+  padding: 12px;
+  width: 450px;
+  border-radius: 8px;
+  border: none;
+}
+
+.search-box button {
+  padding: 12px 20px;
+  background: #e31837;
+  border: none;
+  color: white;
+  margin-left: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.search-box button:hover {
+  background: #b81430;
+}
+
+/* Cards */
+.catalogo {
+  padding: 50px 10px;
+  background: #132238;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 80px;
+}
+
+.vehicle-card {
+  background: white;
+  color: #0a1628;
+  border-radius: 15px;
+  padding: 20px;
+  transition: 0.3s;
 }
 
 
-/* ================================
-   Imagen dentro de la tarjeta
-   ================================ */
-.card-item img {
- width: 100%; 
- height: 34%; 
- border-radius: 8px; 
- cursor: pointer; /* Indica que es interactiva */
- transition: transform 1s; /* Suaviza la rotación */
+.card{
+  background:black;
+  width:400px;
+  border-radius:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+  overflow:hidden;
+  transition:0.3s;
 }
 
-/* Rotación 360° al pasar el cursor o tocar */
-.card-item img:hover, 
-.card-item img:active {
- transform: rotate(360deg);
+.card img{
+  width:100%;
+  background:#eee;
 }
 
-/* ================================
-   Contenido dentro de la tarjeta
-   ================================ */
-.card-content {
- width: 100%; 
- text-align: center; 
- display: flex; 
- flex-direction: column; 
- gap: 10px; 
+.card-content{
+  padding:10px;
 }
 
-.card-content h3 {
- font-size: 1.5rem; 
- margin: 0; 
+.tag{
+  display:inline-block;
+  padding:6px 15px;
+  border:1px solid black;
+  border-radius:20px;
+  font-size:14px;
+  margin-bottom:15px;
 }
 
-.card-content p {
- font-style: italic; 
- color: #00000070; 
+h1{
+  margin:0;
+  font-size:32px;
 }
 
-.card-content button {
- padding: 12px; 
- border: none; 
- border-radius: 4px; 
- background: #e44712; 
- color: #fff; 
- font-weight: bold; 
- font-size: 1rem; 
- cursor: pointer; 
- transition: 0.3s ease; 
+.price{
+  margin:10px 0 20px 0;
+  font-size:18px;
 }
 
-.card-content button:hover {
-  background: #dedede; 
-  color: #0077b6; 
+.buttons{
+  display:flex;
+  gap:15px;
 }
 
-/* ================================
-   Fondo de la página
-   ================================ */
-body.ss {
- background-image: url(../IMG/hero-bg.jpg); 
- background-size: cover; 
- background-position: center; 
- background-repeat: no-repeat; 
-  
+button{
+  flex:1;
+  padding:12px;
+  border-radius:25px;
+  border:none;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+  background:black;
+  color:white;
+}
+
+/* 👇 Estado cuando NO está presionado */
+button:not(:active){
+  background:black;
+}
+
+/* 👇 Cuando lo presionas */
+button:active{
+  background:red;
+  transform:scale(0.95);
+}
+
+.vehicle-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(227, 24, 55, 0.3);
+}
+
+.vehicle-card button {
+  margin-top: 15px;
+  width: 100%;
+  padding: 10px;
+  background: #e31837;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.vehicle-card button:hover {
+  background: #b81430;
+}
+
+/* Footer */
+footer {
+  background: #0a1628;
+  padding: 40px 20px;
+  text-align: center;
+  color: #aaa;
+}
+.header .btn { display: none; }
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 40px 15px;
+  padding-inline-start: 40px;
+  z-index: 4;
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.hero-bg {
+  min-height: 100vh;
+  background: 
+    linear-gradient(rgba(10,22,40,0.85), rgba(10,22,40,0.85)),
+    url("../img/herobg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+  padding-top: 85px;
+
+}
+.hero-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.hero-text {
+  max-width: 500px;
+  z-index: 2;
+}
+
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end; /* lo manda totalmente a la derecha */
+  align-items: center;
+}
+
+.hero-image img {
+  width: 970px; /* más grande */
+  max-width: 100%;
+  height: auto;
+  transform: translateX(60px); /* lo empuja un poco más a la derecha */
+}
+.hero-image img {
+  filter: drop-shadow(0px 20px 40px rgba(0,0,0,0.6));
+}
+.logo img {
+  width: 128px;
+  max-width: 100%;
+  height: auto;
 }
