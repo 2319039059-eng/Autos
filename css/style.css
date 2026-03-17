@@ -1249,3 +1249,40 @@ body {
     max-width: none;
   }
 }
+
+.navbar {
+  position: absolute;
+  top: 80px;
+  right: 5%;
+  width: 90%;
+  background-color: var(--international-orange-engineering);
+
+  /* oculto por defecto */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+
+  transition: 0.3s ease;
+  z-index: 9999; /* 🔥 CLAVE */
+}
+
+.navbar.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* botón hamburguesa visible en móvil */
+.nav-toggle-btn {
+  display: block;
+  z-index: 10000;
+}
+
+/* líneas del botón */
+.nav-toggle-icon {
+  width: 30px;
+  height: 3px;
+  background-color: white;
+  display: block;
+  margin: 5px 0;
+}
