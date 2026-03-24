@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>AutoSelect</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Mulish:wght@400;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Mulish:wght@400;600;700&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
@@ -22,27 +22,27 @@
     <div class="container">
 
       <!-- LOGO -->
-      <a href="#" class="logo">
-        <img src="img/logo1.png" width="128" height="63" alt="autoSelect home">
+      <a href="./index.html" class="logo">
+        <img src="/img/logo1.png" alt="AutoSelect logo">
       </a>
 
       <!-- NAVBAR -->
       <nav class="navbar">
         <ul class="navbar-list">
-          <li><a href="/index.html" class="navbar-link">Inicio</a></li>
-          <li><a href="Interfaces/Catalogo.html" class="navbar-link">Catalogo</a></li>
-          <li><a href="index/footer.html" class="navbar-link">Contactos</a></li>
+          <li><a href="./index.html" class="navbar-link">Inicio</a></li>
+          <li><a href="./Interfaces/Catalogo.html" class="navbar-link">Catálogo</a></li>
+          <li><a href="./Interfaces/footer.html" class="navbar-link">Contactos</a></li>
         </ul>
       </nav>
 
-      <!-- BOTÓN LOGIN -->
-      <a href="Interfaces/Login.html" class="btn btn-primary">
-        <span class="span">Iniciar Sesión</span>
+      <!-- LOGIN -->
+      <a href="./Interfaces/Login.html" class="btn">
+        <span>Iniciar Sesión</span>
         <span class="material-symbols-rounded">arrow_forward</span>
       </a>
 
       <!-- BOTÓN HAMBURGUESA -->
-      <button class="nav-toggle-btn" aria-label="toggle menu">
+      <button class="nav-toggle-btn" aria-label="Abrir menú">
         <span class="nav-toggle-icon icon-1"></span>
         <span class="nav-toggle-icon icon-2"></span>
         <span class="nav-toggle-icon icon-3"></span>
@@ -51,19 +51,28 @@
     </div>
   </header>
 
-  <!-- ===== SCRIPT ===== -->
-<script>
-document.addEventListener("DOMContentLoaded", function () {
+  <!-- 🔥 OVERLAY (IMPORTANTE) -->
+  <div class="overlay"></div>
 
-  const btn = document.querySelector(".nav-toggle-btn");
-  const navbar = document.querySelector(".navbar");
+  <!-- ===== SCRIPT PRO ===== -->
+  <script>
+const navToggle = document.querySelector(".nav-toggle-btn");
+const navbar = document.querySelector(".navbar");
+const overlay = document.querySelector(".overlay");
 
-  btn.addEventListener("click", function () {
-    navbar.classList.toggle("active");
-    btn.classList.toggle("active");
-  });
+navToggle.addEventListener("click", () => {
+  navToggle.classList.toggle("active");
+  navbar.classList.toggle("active");
+  overlay.classList.toggle("active");
+});
 
+overlay.addEventListener("click", () => {
+  navToggle.classList.remove("active");
+  navbar.classList.remove("active");
+  overlay.classList.remove("active");
 });
 </script>
+
 </body>
+
 </html>

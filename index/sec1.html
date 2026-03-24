@@ -8,7 +8,7 @@
 </head>
 <body>
   
-    <section class="hero has-bg-image" aria-label="home" style="background-image: url('img/herobg.jpg')">
+    <section class="hero has-bg-image" aria-label="home" style="background-image: url('/img/herobg.jpg')">
         <div class="container">
 
           <div class="hero-content">
@@ -26,10 +26,33 @@
           </div>
 
           <figure class="hero-banner" style="--width: 1228; --height: 789;">
-            <img src="img/herobanner.png" width="1228" height="789" alt="red motor vehicle" class="move-anim">
+            <img src="/img/herobanner.png" width="1228" height="789" alt="red motor vehicle" class="move-anim">
           </figure>
 
         </div>
       </section>
+      <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.querySelector(".nav-toggle-btn");
+    const navbar = document.querySelector(".navbar");
+    const overlay = document.querySelector(".overlay");
+
+    if (btn) {
+      btn.addEventListener("click", () => {
+        navbar.classList.toggle("active");
+        btn.classList.toggle("active");
+        overlay.classList.toggle("active");
+      });
+    }
+
+    if (overlay) {
+      overlay.addEventListener("click", () => {
+        navbar.classList.remove("active");
+        btn.classList.remove("active");
+        overlay.classList.remove("active");
+      });
+    }
+  });
+</script>
 </body>
 </html>
