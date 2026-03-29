@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Administrador</title>
+    <link rel="stylesheet" href="../css/formG.css">
+</head>
+
+<body>
+
+<div class="login-container">
+    <h2>Acceso Administrador</h2>
+
+    <!-- 🔥 FORM SIN PHP -->
+    <form onsubmit="login(event)">
+
+        <div class="input-group">
+            <label>Correo</label>
+            <input type="text" id="correo" required>
+        </div>
+
+        <div class="input-group">
+            <label>Contraseña</label>
+            <input type="password" id="password" required>
+        </div>
+
+        <button type="submit" class="btn-login">Iniciar sesión</button>
+    </form>
+
+    <div class="footer-text">
+        Acceso restringido a personal autorizado
+    </div>
+</div>
+
+<!-- 🔥 SCRIPT LOGIN CORREGIDO -->
+<script>
+function login(e){
+    e.preventDefault();
+
+    let correo = document.getElementById("correo").value;
+    let password = document.getElementById("password").value;
+
+    fetch("http://localhost:8084/api/jefe/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            correo: correo,
+            contrasena: password
+        })
+    })
+    .then(res => res.text())
+    .then(data => {
+
+        if(data === "admin"){
+            window.location.href = "consultarG.html";
+        }
+        else{
+            alert("❌ Usuario o contraseña incorrectos");
+        }
+    })
+    .catch(() => alert("❌ Error de conexión"));
+}
+</script>
+</body>
+</html>
