@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CRUD Clientes</title>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+    <h2 class="text-center mb-4">CRUD CLIENTES</h2>
+
+    <input id="buscar" class="form-control mb-3" placeholder="Buscar..." onkeyup="buscarClientes()">
+
+    <div class="card mb-4">
+        <div class="card-body">
+
+            <input type="hidden" id="idCliente">
+
+            <input id="nombre" class="form-control mb-2" placeholder="Nombre">
+            <input id="apaterno" class="form-control mb-2" placeholder="Apellido Paterno">
+            <input id="amaterno" class="form-control mb-2" placeholder="Apellido Materno">
+            <input id="correo" class="form-control mb-2" placeholder="Correo">
+            <input id="contrasena" type="password" class="form-control mb-2" placeholder="Contraseña">
+
+            <button class="btn btn-success w-100" onclick="guardarCliente()">Guardar</button>
+
+        </div>
+    </div>
+
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th><th>Nombre</th><th>Paterno</th><th>Materno</th><th>Correo</th><th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tabla"></tbody>
+    </table>
+
+</div>
+
+<script>
+
+const URL = "http://localhost:8084/api";
+
+function listarClientes(){
+    fetch(URL)
+    .then(res => res.json())
+    .then(data => mostrar(data));
+}
+
+function mostrar(data){
+    tabla.innerHTML = "";
+    data.forEach(c=>{
+        tabla.innerHTML += `
+        <tr>
+            <td>${c.idCliente}</td>
+            <td>${c.nombre}</td>
+            <td>${c.aPaterno}</td>
+            <td>${c.aMaterno}</td>
+            <td>${c.correo}</td>
+            <td>
+                <button onclick="editar(${c.idCliente},'${c.nombre}','${c.aPaterno}','${c.aMaterno}','${c.correo}')" class="btn btn-warning btn-sm">Editar</button>
+                <button onclick="eliminar(${c.idCliente})" class="btn btn-danger btn-sm">Eliminar</button>
+            </td>
+        </tr>`;
+    });
+}
+
+function guardarCliente(){
+    let id = idCliente.value;
+
+    let obj = {
+        nombre:nombre.value,
+        aPaterno:apaterno.value,
+        aMaterno:amaterno.value,
+        correo:correo.value,
+        contrasena:contrasena.value
+    };
+
+    let metodo = id ? "PUT" : "POST";
+    let url = id ? URL+"/"+id : URL;
+
+    fetch(url,{
+        method:metodo,
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(obj)
+    }).then(()=>{listarClientes(); limpiar();});
+}
+
+function editar(id,n,ap,am,c){
+    idCliente.value=id;
+    nombre.value=n;
+    apaterno.value=ap;
+    amaterno.value=am;
+    correo.value=c;
+}
+
+function eliminar(id){
+    fetch(URL+"/"+id,{method:"DELETE"})
+    .then(()=>listarClientes());
+}
+
+function buscarClientes(){
+    let txt = buscar.value.toLowerCase();
+    fetch(URL)
+    .then(res=>res.json())
+    .then(data=>{
+        mostrar(data.filter(c=>c.nombre.toLowerCase().includes(txt)));
+    });
+}
+
+function limpiar(){
+    idCliente.value="";
+    nombre.value="";
+    apaterno.value="";
+    amaterno.value="";
+    correo.value="";
+    contrasena.value="";
+}
+
+listarClientes();
+
+</script>
+
+</body>
+</html>

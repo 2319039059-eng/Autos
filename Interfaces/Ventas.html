@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CRUD Ventas</title>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+<h2 class="text-center mb-4">CRUD VENTAS</h2>
+
+<input id="buscar" class="form-control mb-3" placeholder="Buscar..." onkeyup="buscarVentas()">
+
+<input type="hidden" id="idVenta">
+
+<select id="auto" class="form-control mb-2"></select>
+<select id="cliente" class="form-control mb-2"></select>
+<select id="vendedor" class="form-control mb-2"></select>
+
+<input type="date" id="fecha" class="form-control mb-2">
+<input type="number" id="total" class="form-control mb-2" placeholder="Total">
+
+<button onclick="guardar()" class="btn btn-success mb-3 w-100">Guardar</button>
+
+<table class="table table-bordered">
+<thead class="table-dark">
+<tr>
+<th>ID</th><th>Auto</th><th>Cliente</th><th>Vendedor</th><th>Fecha</th><th>Total</th><th>Acciones</th>
+</tr>
+</thead>
+<tbody id="tabla"></tbody>
+</table>
+
+</div>
+
+<script>
+
+const API="http://localhost:8084";
+
+function cargar(){
+fetch(API+"/api/autos").then(r=>r.json()).then(d=>{
+auto.innerHTML='<option value="">Auto</option>';
+d.forEach(a=>auto.innerHTML+=`<option value="${a.idAuto}">${a.marca}</option>`);
+});
+
+fetch(API+"/api").then(r=>r.json()).then(d=>{
+cliente.innerHTML='<option value="">Cliente</option>';
+d.forEach(c=>cliente.innerHTML+=`<option value="${c.idCliente}">${c.nombre}</option>`);
+});
+
+fetch(API+"/api/vendedores").then(r=>r.json()).then(d=>{
+vendedor.innerHTML='<option value="">Vendedor</option>';
+d.forEach(v=>vendedor.innerHTML+=`<option value="${v.idVendedor}">${v.nombre}</option>`);
+});
+}
+
+function listar(){
+fetch(API+"/api/ventas").then(r=>r.json()).then(mostrar);
+}
+
+function mostrar(data){
+tabla.innerHTML="";
+data.forEach(v=>{
+tabla.innerHTML+=`
+<tr>
+<td>${v.idVenta}</td>
+<td>${v.idAuto}</td>
+<td>${v.idCliente}</td>
+<td>${v.idVendedor}</td>
+<td>${v.fecha}</td>
+<td>${v.total}</td>
+<td>
+<button class="btn btn-warning btn-sm" onclick="editar(${v.idVenta},${v.idAuto},${v.idCliente},${v.idVendedor},'${v.fecha}',${v.total})">Editar</button>
+<button class="btn btn-danger btn-sm" onclick="eliminar(${v.idVenta})">Eliminar</button>
+</td>
+</tr>`;
+});
+}
+
+function guardar(){
+let id=idVenta.value;
+
+let obj={
+idAuto:auto.value,
+idCliente:cliente.value,
+idVendedor:vendedor.value,
+fecha:fecha.value,
+total:total.value
+};
+
+fetch(id?API+"/api/ventas/"+id:API+"/api/ventas",{
+method:id?"PUT":"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify(obj)
+}).then(()=>{listar(); limpiar();});
+}
+
+function editar(id,a,c,v,f,t){
+idVenta.value=id;
+auto.value=a;
+cliente.value=c;
+vendedor.value=v;
+fecha.value=f;
+total.value=t;
+}
+
+function eliminar(id){
+fetch(API+"/api/ventas/"+id,{method:"DELETE"}).then(listar);
+}
+
+function buscarVentas(){
+let t=buscar.value.toLowerCase();
+fetch(API+"/api/ventas").then(r=>r.json()).then(d=>{
+mostrar(d.filter(v=>v.idVenta.toString().includes(t)));
+});
+}
+
+function limpiar(){
+idVenta.value="";
+auto.value="";
+cliente.value="";
+vendedor.value="";
+fecha.value="";
+total.value="";
+}
+
+cargar();
+listar();
+
+</script>
+
+</body>
+</html>

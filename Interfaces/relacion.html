@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Relación Clientes - Ventas</title>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-dark text-white">
+
+<div class="container mt-5">
+
+    <h2 class="text-center mb-4">Relación Clientes + Ventas</h2>
+
+    <button class="btn btn-light mb-3" onclick="window.location.href='index.html'">
+        ⬅️ Regresar
+    </button>
+
+    <table class="table table-bordered table-hover bg-white text-dark">
+        <thead class="table-dark">
+            <tr>
+                <th>Cliente</th>
+                <th>Vendedor</th>
+                <th>Auto</th>
+                <th>Total</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody id="tablaRelacion"></tbody>
+    </table>
+
+</div>
+
+<script>
+
+const API = "http://localhost:8084/api/ventas/clientes-ventas";
+
+function cargarRelacion(){
+
+    fetch(API)
+    .then(res => res.json())
+    .then(data => {
+
+        let tabla = document.getElementById("tablaRelacion");
+        tabla.innerHTML = "";
+
+        data.forEach(r => {
+            tabla.innerHTML += `
+                <tr>
+                    <td>${r[0]}</td>
+                    <td>${r[1]}</td>
+                    <td>${r[2]}</td>
+                    <td>${r[3]}</td>
+                    <td>${r[4]}</td>
+                </tr>
+            `;
+        });
+
+    })
+    .catch(() => alert("❌ Error al cargar relación"));
+}
+
+cargarRelacion();
+
+</script>
+
+</body>
+</html>

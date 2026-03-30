@@ -1,128 +1,195 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Lista de Clientes</title>
+    <title>CRUD Clientes</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <style>
-        body { background-color: #f8f9fa; }
-        footer { background-color: #343a40; color: white; padding: 20px 0; margin-top: 50px; }
-    </style>
 </head>
 
-<body>
+<body class="bg-light">
 
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
-        <div class="container">
-            <a class="navbar-brand" href="#">Sistema de Clientes</a>
-        </div>
-    </nav>
-</header>
+<div class="container mt-5">
 
-<main class="container my-5">
-    <div class="shadow-sm p-4 bg-white rounded">
-        <h2 class="text-center text-primary mb-4">Panel de Gestión de Clientes</h2>
+    <h2 class="text-center mb-4">CRUD CLIENTES</h2>
 
-        <div class="mb-3 text-end">
-            <button class="btn btn-success" onclick="listarClientes()">Actualizar</button>
-        </div>
+    <!-- 🔥 FORMULARIO -->
+    <div class="card mb-4">
+        <div class="card-body">
 
-        <div class="table-responsive">
-            <table class="table table-hover align-middle">
-                <thead class="table-dark">
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Apellido Paterno</th>
-                        <th>Apellido Materno</th>
-                        <th>Correo</th>
-                        <th class="text-center">Acciones</th>
-                    </tr>
-                </thead>
+            <input type="hidden" id="idCliente">
 
-                <tbody id="tablaCuerpo"></tbody>
-            </table>
+            <input id="nombre" class="form-control mb-2" placeholder="Nombre">
+            <input id="apaterno" class="form-control mb-2" placeholder="Apellido Paterno">
+            <input id="amaterno" class="form-control mb-2" placeholder="Apellido Materno">
+            <input id="correo" class="form-control mb-2" placeholder="Correo">
+            <input id="contrasena" type="password" class="form-control mb-2" placeholder="Contraseña">
+
+            <button class="btn btn-success w-100" onclick="guardarCliente()">Guardar</button>
+
         </div>
     </div>
-</main>
 
-<footer class="text-center">
-    <div class="container">
-        <p class="mb-0">&copy; 2026 - Gestión de Clientes</p>
+    <div class="d-flex gap-2 mb-3">
+        <button class="btn btn-primary" onclick="listarClientes()">Ver Clientes</button>
+        <button class="btn btn-dark" onclick="verClientesVentas()">Ver Clientes con Ventas</button>
     </div>
-</footer>
+
+    <!-- TABLA -->
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Paterno</th>
+                <th>Materno</th>
+                <th>Correo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tablaCuerpo"></tbody>
+    </table>
+
+</div>
 
 <script>
 
-// ⚠️ CAMBIA SOLO SI TU PUERTO ES DIFERENTE
 const URL = "http://localhost:8084/api";
+const URL_VENTAS = "http://localhost:8084/api/ventas";
 
+// 🔥 LISTAR CLIENTES
 function listarClientes(){
     fetch(URL)
-    .then(response => {
-        if(!response.ok) throw new Error("Error en la respuesta");
-        return response.json();
-    })
+    .then(res => res.json())
     .then(data => {
 
-        console.log("DATOS:", data); // DEBUG
-
-        let tablaCuerpo = document.getElementById('tablaCuerpo');
-        tablaCuerpo.innerHTML = '';
-
-        if(data.length === 0){
-            tablaCuerpo.innerHTML = `
-                <tr>
-                    <td colspan="6" class="text-center">No hay clientes registrados</td>
-                </tr>
-            `;
-            return;
-        }
+        let tabla = document.getElementById("tablaCuerpo");
+        tabla.innerHTML = "";
 
         data.forEach(cliente => {
 
-            let fila = document.createElement('tr');
+            tabla.innerHTML += `
+                <tr>
+                    <td>${cliente.idCliente}</td>
+                    <td>${cliente.nombre}</td>
+                    <td>${cliente.aPaterno}</td>
+                    <td>${cliente.aMaterno}</td>
+                    <td>${cliente.correo}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" onclick="editarCliente(${cliente.idCliente}, '${cliente.nombre}', '${cliente.aPaterno}', '${cliente.aMaterno}', '${cliente.correo}')">
+                            Editar
+                        </button>
 
-            fila.innerHTML = `
-                <td>${cliente.idCliente}</td>
-                <td>${cliente.nombre}</td>
-                <td>${cliente.aPaterno}</td>
-                <td>${cliente.aMaterno}</td>
-                <td>${cliente.correo}</td>
-                <td class="text-center">
-                    <button class="btn btn-danger btn-sm" onclick="eliminarCliente(${cliente.id})">Eliminar</button>
-                </td>
+                        <button class="btn btn-danger btn-sm" onclick="eliminarCliente(${cliente.idCliente})">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
             `;
-
-            tablaCuerpo.appendChild(fila);
         });
-    })
-    .catch(error => {
-        console.error(error);
-        alert("❌ No se pudo conectar con el servidor");
+
     });
 }
 
-function eliminarCliente(id){
-    if(confirm('¿Deseas eliminar este cliente?')){
-        fetch(`${URL}/${id}`, { method: 'DELETE' })
-        .then(response => {
-            if(!response.ok) throw new Error();
-            return response.text();
+// 🔥 GUARDAR / EDITAR
+function guardarCliente(){
+
+    let id = document.getElementById("idCliente").value;
+
+    let cliente = {
+        nombre: document.getElementById("nombre").value,
+        aPaterno: document.getElementById("apaterno").value,
+        aMaterno: document.getElementById("amaterno").value,
+        correo: document.getElementById("correo").value,
+        contrasena: document.getElementById("contrasena").value
+    };
+
+    if(id){
+        fetch(`${URL}/${id}`, {
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(cliente)
         })
         .then(() => {
-            alert("✅ Cliente eliminado");
+            alert("✏️ Cliente actualizado");
+            limpiarFormulario();
             listarClientes();
+        });
+
+    } else {
+        fetch(URL, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(cliente)
         })
-        .catch(() => alert("❌ Error al eliminar"));
+        .then(() => {
+            alert("✅ Cliente agregado");
+            limpiarFormulario();
+            listarClientes();
+        });
     }
 }
 
-// 🔥 SE EJECUTA AUTOMÁTICAMENTE AL CARGAR
+// 🔥 EDITAR
+function editarCliente(id, nombre, ap, am, correo){
+
+    document.getElementById("idCliente").value = id;
+    document.getElementById("nombre").value = nombre;
+    document.getElementById("apaterno").value = ap;
+    document.getElementById("amaterno").value = am;
+    document.getElementById("correo").value = correo;
+}
+
+// 🔥 ELIMINAR
+function eliminarCliente(id){
+
+    fetch(`${URL}/${id}`, {
+        method: "DELETE"
+    })
+    .then(() => {
+        alert("🗑️ Eliminado");
+        listarClientes();
+    })
+    .catch(() => alert("❌ Error al eliminar"));
+}
+
+// 🔥 LIMPIAR
+function limpiarFormulario(){
+    document.getElementById("idCliente").value = "";
+    document.getElementById("nombre").value = "";
+    document.getElementById("apaterno").value = "";
+    document.getElementById("amaterno").value = "";
+    document.getElementById("correo").value = "";
+    document.getElementById("contrasena").value = "";
+}
+
+// 🔥 JOIN CLIENTES + VENTAS
+function verClientesVentas(){
+    fetch(`${URL_VENTAS}/clientes-ventas`)
+    .then(res => res.json())
+    .then(data => {
+
+        let tabla = document.getElementById("tablaCuerpo");
+        tabla.innerHTML = "";
+
+        data.forEach(item => {
+
+            tabla.innerHTML += `
+                <tr>
+                    <td>${item[0]}</td>
+                    <td>${item[2]}</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>✔ Tiene venta</td>
+                </tr>
+            `;
+        });
+
+    })
+    .catch(() => alert("❌ Error en JOIN"));
+}
+
+// 🔥 AUTO CARGA
 listarClientes();
 
 </script>
