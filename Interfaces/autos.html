@@ -1,103 +1,232 @@
+<!--UNIVERDIDAD POLITECNICA DE FRANCISCO I.MADERO
+ * INGENIERIA EN SISTEMAS COMPUTACIONALES 
+ * AUTOSELECT
+ * INTEGRANTES: 
+ * Flor Ilen Marcial Nava
+ * Jiapsi Zuszeth Alamilla Ramirez
+ * Israel Macario Flores
+ * Evelin Itzmartzin Barrera Lugo
+ * docente:
+ * ingeniero Cain Hernandez Angeles 
+ * fecha: 31/03/2026
+ * */-->
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>CRUD Autos</title>
+
+    <!--  Icono de la pestaña -->
+    <link rel="shortcut icon" href="../img/Favicon.jpg">
+
     <meta charset="UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Tu hoja de estilos personalizada -->
+    <link rel="stylesheet" href="../css/panel.css">
 </head>
 
-<body class="bg-light">
-<div class="container mt-5">
+<body>
 
-<h2 class="text-center">CRUD AUTOS</h2>
+<div class="container">
 
-<input id="buscar" class="form-control mb-3" placeholder="Buscar..." onkeyup="buscarAutos()">
+    <!--  Título -->
+    <h2>CRUD AUTOS</h2>
 
-<input type="hidden" id="idAuto">
+    <!--  Botón para regresar al menú -->
+    <button class="btn-back" onclick="window.location.href='menu.html'">
+        ←
+    </button>
 
-<input id="marca" class="form-control mb-2" placeholder="Marca">
-<input id="modelo" class="form-control mb-2" placeholder="Modelo">
-<input id="color" class="form-control mb-2" placeholder="Color">
+    <!--  Buscador en tiempo real -->
+    <input id="buscar" placeholder="Buscar..." onkeyup="buscarAutos()">
 
-<button onclick="guardar()" class="btn btn-success mb-3">Guardar</button>
+    <!--  Campo oculto para guardar el ID cuando editas -->
+    <input type="hidden" id="idAuto">
 
-<table class="table">
-<thead class="table-dark">
-<tr><th>ID</th><th>Marca</th><th>Modelo</th><th>Color</th><th>Acciones</th></tr>
-</thead>
-<tbody id="tabla"></tbody>
-</table>
+    <!--  Campos del formulario -->
+    <input id="marca" placeholder="Marca">
+    <input id="modelo" placeholder="Modelo">
+    <input id="color" placeholder="Color">
+    <input id="stock" type="number" placeholder="Stock">
 
+    <!-- 💾 Botón guardar -->
+    <button onclick="guardar()" class="btn-success">Guardar</button>
+
+    <!--  Tabla de autos -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Color</th>
+                <th>Stock</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <!--  Aquí se cargan los datos dinámicamente -->
+        <tbody id="tabla"></tbody>
+    </table>
+
+</div>
+
+<!-- =========================
+      MODAL PERSONALIZADO
+========================= -->
+<div id="modal" class="modal-custom">
+    <div class="modal-content-custom">
+
+        <!--  Texto del mensaje -->
+        <p id="modal-text">Mensaje</p>
+
+        <!--  Botones del modal -->
+        <div class="modal-buttons">
+            <button class="btn-success" onclick="confirmar()">Aceptar</button>
+            <button class="btn-danger" onclick="cerrarModal()">Cancelar</button>
+        </div>
+    </div>
 </div>
 
 <script>
 
-const URL="http://localhost:8084/api/autos";
+//  URL de tu API backend
+const API="http://localhost:8084/autos";
 
+//  Guarda la acción que se ejecutará al confirmar (ej: eliminar)
+let accionConfirmada = null;
+
+/* =========================
+    FUNCIONES DEL MODAL
+========================= */
+
+//  Muestra el modal con mensaje
+function mostrarModal(mensaje, callback){
+    document.getElementById("modal-text").innerText = mensaje; // Texto
+    document.getElementById("modal").classList.add("active"); // Mostrar modal
+    accionConfirmada = callback; // Guarda la acción a ejecutar
+}
+
+//  Cierra el modal
+function cerrarModal(){
+    document.getElementById("modal").classList.remove("active");
+}
+
+//  Ejecuta la acción confirmada
+function confirmar(){
+    if(accionConfirmada) accionConfirmada(); // Ejecuta función guardada
+    cerrarModal(); // Cierra modal
+}
+
+/* =========================
+    FUNCIONES CRUD
+========================= */
+
+//  LISTAR AUTOS
 function listar(){
-fetch(URL).then(r=>r.json()).then(mostrar);
+    fetch(API) // Hace petición GET
+    .then(r=>r.json()) // Convierte a JSON
+    .then(mostrar); // Manda datos a función mostrar
 }
 
+//  MOSTRAR DATOS EN TABLA
 function mostrar(data){
-tabla.innerHTML="";
-data.forEach(a=>{
-tabla.innerHTML+=`
-<tr>
-<td>${a.idAuto}</td>
-<td>${a.marca}</td>
-<td>${a.modelo}</td>
-<td>${a.color}</td>
-<td>
-<button onclick="editar(${a.idAuto},'${a.marca}','${a.modelo}','${a.color}')" class="btn btn-warning btn-sm">Editar</button>
-<button onclick="eliminar(${a.idAuto})" class="btn btn-danger btn-sm">Eliminar</button>
-</td>
-</tr>`;
-});
+    tabla.innerHTML=""; // Limpia tabla
+
+    data.forEach(a=>{
+        tabla.innerHTML+=`
+        <tr>
+            <td>${a.idAuto}</td>
+            <td>${a.marca}</td>
+            <td>${a.modelo}</td>
+            <td>${a.color}</td>
+            <td>${a.stock}</td>
+            <td>
+                <!--  BOTÓN EDITAR -->
+                <button class="btn-warning" 
+                onclick="editar(${a.idAuto},'${a.marca}','${a.modelo}','${a.color}',${a.stock})">
+                Editar</button>
+
+                <!--  BOTÓN ELIMINAR -->
+                <button class="btn-danger" onclick="eliminar(${a.idAuto})">
+                Eliminar</button>
+            </td>
+        </tr>`;
+    });
 }
 
+//  GUARDAR O EDITAR
 function guardar(){
-let id=idAuto.value;
 
-let obj={
-marca:marca.value,
-modelo:modelo.value,
-color:color.value
-};
+    let id=idAuto.value; // Si tiene ID → editar
 
-fetch(id?URL+"/"+id:URL,{
-method:id?"PUT":"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify(obj)
-}).then(()=>{listar(); limpiar();});
+    //  Objeto que se enviará al backend
+    let obj={
+        marca:marca.value,
+        modelo:modelo.value,
+        color:color.value,
+        stock:stock.value,
+        idProveedor:1,
+        rutaImagen:""
+    };
+
+    //  Si hay ID → PUT, si no → POST
+    fetch(id?API+"/"+id:API,{
+        method:id?"PUT":"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(obj)
+    })
+    .then(()=>{
+        mostrarModal("✅ Guardado correctamente", null); // Mensaje
+        listar(); // Actualiza tabla
+        limpiar(); // Limpia formulario
+    });
 }
 
-function editar(id,m,mo,c){
-idAuto.value=id;
-marca.value=m;
-modelo.value=mo;
-color.value=c;
+// CARGAR DATOS PARA EDITAR
+function editar(id,m,mo,c,s){
+    idAuto.value=id;
+    marca.value=m;
+    modelo.value=mo;
+    color.value=c;
+    stock.value=s;
 }
 
+//  ELIMINAR CON CONFIRMACIÓN
 function eliminar(id){
-fetch(URL+"/"+id,{method:"DELETE"}).then(listar);
+    mostrarModal("⚠️ ¿Eliminar este registro?", () => {
+        fetch(API+"/"+id,{method:"DELETE"})
+        .then(()=>{
+            mostrarModal("✅ Eliminado correctamente", null);
+            listar();
+        });
+    });
 }
 
+//  BUSCAR EN TIEMPO REAL
 function buscarAutos(){
-let t=buscar.value.toLowerCase();
-fetch(URL).then(r=>r.json()).then(d=>{
-mostrar(d.filter(a=>a.marca.toLowerCase().includes(t)));
-});
+    let t=buscar.value.toLowerCase();
+
+    fetch(API).then(r=>r.json()).then(d=>{
+        mostrar(
+            d.filter(a=>a.marca.toLowerCase().includes(t))
+        );
+    });
 }
 
+//  LIMPIAR FORMULARIO
 function limpiar(){
-idAuto.value="";
-marca.value="";
-modelo.value="";
-color.value="";
+    idAuto.value="";
+    marca.value="";
+    modelo.value="";
+    color.value="";
+    stock.value="";
 }
 
+//  INICIO AUTOMÁTICO
 listar();
 
 </script>
+
 </body>
 </html>

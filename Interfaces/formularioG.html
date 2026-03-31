@@ -1,67 +1,124 @@
+<!--UNIVERDIDAD POLITECNICA DE FRANCISCO I.MADERO
+ * INGENIERIA EN SISTEMAS COMPUTACIONALES 
+ * AUTOSELECT
+ * INTEGRANTES: 
+ * Flor Ilen Marcial Nava
+ * Jiapsi Zuszeth Alamilla Ramirez
+ * Israel Macario Flores
+ * Evelin Itzmartzin Barrera Lugo
+ * docente:
+ * ingeniero Cain Hernandez Angeles 
+ * fecha: 31/03/2026
+ * */-->
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+
+    <!--  Título de la pestaña -->
     <title>Login Administrador</title>
+
+    <!--  Estilos del formulario -->
     <link rel="stylesheet" href="../css/formG.css">
+
+    <!--  Icono de la pestaña -->
+    <link rel="shortcut icon" href="/img/Favicon.jpg">
+
+    <!--  Estilos generales del sistema -->
+    <link rel="stylesheet" href="../css/panel.css">
 </head>
 
 <body>
 
+<!-- =========================
+      CONTENEDOR LOGIN
+========================= -->
 <div class="login-container">
+
+    <!--  Título -->
     <h2>Acceso Administrador</h2>
 
-    <!-- 🔥 FORM SIN PHP -->
+    <!--  Botón para regresar al inicio -->
+    <button class="btn-back" onclick="window.location.href='../index.html'">
+        ←
+    </button>
+
+    <!-- =========================
+          FORMULARIO LOGIN
+    ========================= -->
     <form onsubmit="login(event)">
 
+        <!--  INPUT CORREO -->
         <div class="input-group">
             <label>Correo</label>
             <input type="text" id="correo" required>
         </div>
 
+        <!--  INPUT CONTRASEÑA -->
         <div class="input-group">
             <label>Contraseña</label>
             <input type="password" id="password" required>
         </div>
 
+        <!--  BOTÓN ENVIAR -->
         <button type="submit" class="btn-login">Iniciar sesión</button>
     </form>
 
+    <!-- ℹ Texto informativo -->
     <div class="footer-text">
         Acceso restringido a personal autorizado
     </div>
 </div>
 
-<!-- 🔥 SCRIPT LOGIN CORREGIDO -->
+<!-- =========================
+      SCRIPT LOGIN
+========================= -->
 <script>
-function login(e){
-    e.preventDefault();
 
+//  FUNCIÓN QUE SE EJECUTA AL ENVIAR EL FORMULARIO
+function login(e){
+
+    e.preventDefault(); 
+    //  Evita que la página se recargue
+
+    //  Obtiene los valores del formulario
     let correo = document.getElementById("correo").value;
     let password = document.getElementById("password").value;
 
+    //  ENVÍA DATOS AL BACKEND
     fetch("http://localhost:8084/api/jefe/login", {
-        method: "POST",
+        method: "POST", // 🔥 Tipo de petición
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json" // 📦 Tipo de datos enviados
         },
         body: JSON.stringify({
-            correo: correo,
-            contrasena: password
+            correo: correo,        // 📧 Se envía el correo
+            contrasena: password   // 🔑 Se envía la contraseña
         })
     })
+
+    //  Convierte la respuesta a texto
     .then(res => res.text())
+
+    // 🔍 Analiza la respuesta del backend
     .then(data => {
 
+        //  SI EL BACKEND REGRESA "admin"
         if(data === "admin"){
-            window.location.href = "menu.html";
+            window.location.href = "menu.html"; 
+            //  Redirige al menú principal
         }
         else{
+            //  SI FALLA EL LOGIN
             alert("❌ Usuario o contraseña incorrectos");
         }
     })
+
+    // ERROR DE CONEXIÓN (backend apagado, etc.)
     .catch(() => alert("❌ Error de conexión"));
 }
 </script>
+
 </body>
 </html>

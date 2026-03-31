@@ -1,0 +1,293 @@
+/*UNIVERDIDAD POLITECNICA DE FRANCISCO I.MADERO
+ * INGENIERIA EN SISTEMAS COMPUTACIONALES 
+ * AUTOSELECT
+ * INTEGRANTES: 
+ * Flor Ilen Marcial Nava
+ * Jiapsi Zuszeth Alamilla Ramirez
+ * Israel Macario Flores
+ * Evelin Itzmartzin Barrera Lugo
+ * docente:
+ * ingeniero Cain Hernandez Angeles 
+ * fecha: 31/03/2026
+ *  */
+
+/* =========================
+   ESTILO GLOBAL
+========================= */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: #ffffff;
+}
+
+/* =========================
+   CONTENEDOR
+========================= */
+.container {
+    padding: 40px;
+}
+
+/* =========================
+   TÍTULOS
+========================= */
+h1, h2 {
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* =========================
+   BOTONES GENERALES
+========================= */
+button {
+    border: none;
+    border-radius: 30px;
+    padding: 12px 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* BOTÓN PRINCIPAL */
+.btn-primary {
+    background: #dc2626;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #b91c1c;
+}
+
+/* BOTONES SECUNDARIOS */
+.btn-info {
+    background: #06b6d4;
+    color: white;
+}
+
+.btn-success {
+    background: #16a34a;
+    color: white;
+}
+
+.btn-warning {
+    background: #facc15;
+    color: black;
+}
+
+.btn-danger {
+    background: #ef4444;
+    color: white;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* =========================
+   FORMULARIOS
+========================= */
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: none;
+    background: #1e293b;
+    color: white;
+    outline: none;
+}
+
+input::placeholder {
+    color: #94a3b8;
+}
+
+/* =========================
+   TABLAS
+========================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #1e293b;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+thead {
+    background: #0f172a;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    color: #e2e8f0;
+}
+
+td {
+    color: #cbd5f5;
+}
+
+tr:nth-child(even) {
+    background: #172033;
+}
+
+/* =========================
+   MENÚ (BOTONES GRANDES)
+========================= */
+.menu-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.menu-btn {
+    width: 250px;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+    color: white;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+/* COLORES DEL MENÚ */
+.clientes { background: linear-gradient(45deg, #2563eb, #1d4ed8); }
+.autos { background: linear-gradient(45deg, #16a34a, #15803d); }
+.vendedores { background: linear-gradient(45deg, #facc15, #eab308); color: black; }
+.ventas { background: linear-gradient(45deg, #06b6d4, #0891b2); }
+.relacion { background: linear-gradient(45deg, #ef4444, #dc2626); }
+
+.menu-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+}
+
+/* =========================
+   SOMBRAS GENERALES
+========================= */
+.card, input, select {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+/* =========================
+   HERO (PORTADA)
+========================= */
+.hero {
+    background: url('tu-imagen.jpg') no-repeat center center/cover;
+    position: relative;
+    height: 400px;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.85);
+    top: 0;
+    left: 0;
+}
+
+/* =========================
+   BARRA DE BÚSQUEDA
+========================= */
+input[type="text"] {
+    background: #0f172a;
+}
+
+/* =========================
+   BOTONES DE TABLA
+========================= */
+td button {
+    margin: 2px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+    .menu-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu-btn {
+        width: 90%;
+    }
+}
+/* =========================
+   MODAL / ALERTA PERSONALIZADA
+========================= */
+.modal-custom {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.modal-custom.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-content-custom {
+    background: #1e293b;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+}
+
+.modal-content-custom p {
+    margin-bottom: 20px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-around;
+}
+/* =========================
+   BOTÓN REGRESAR (FLECHA)
+========================= */
+.btn-back {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: #1e293b;
+    color: white;
+    border: none;
+    font-size: 22px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    transition: 0.3s;
+}
+
+.btn-back:hover {
+    background: #dc2626;
+    transform: scale(1.1);
+}
